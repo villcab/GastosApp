@@ -9,6 +9,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.googlecode.openbeans.PropertyDescriptor;
+import com.villcab.gastos.entitys.Producto;
+import com.villcab.gastos.utils.model.annotations.Ignore;
+import com.villcab.gastos.utils.model.annotations.Key;
+import com.villcab.gastos.utils.model.annotations.Nullable;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -30,13 +34,13 @@ public abstract class Wrapper extends SQLiteOpenHelper {
     protected Context context;
 
     public Wrapper(Context context) {
-        super(context, Config.databaseName, null, 1);
+        super(context, Setting.databaseName, null, 1);
 
         this.context = context;
     }
 
     public Wrapper(Context context, SQLiteDatabase connection) {
-        super(context, Config.databaseName, null, 1);
+        super(context, Setting.databaseName, null, 1);
         this.connection = connection;
     }
 
@@ -184,7 +188,6 @@ public abstract class Wrapper extends SQLiteOpenHelper {
         return "";
     }
 
-    @SuppressWarnings("unchecked")
     protected <T extends Entity> List<T> list(String query, Entity entity) {
         List<T> lstResult = new ArrayList<T>();
         SQLiteDatabase objDb = this.getReadableDatabase();
@@ -209,7 +212,6 @@ public abstract class Wrapper extends SQLiteOpenHelper {
         return lstResult;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     protected List<Map> genericList(String strQuery) {
         List<Map> lstResult = new ArrayList<Map>();
         Map obj;
@@ -239,7 +241,6 @@ public abstract class Wrapper extends SQLiteOpenHelper {
         return lstResult;
     }
 
-    @SuppressWarnings("unchecked")
     public <T extends Entity> T load(Cursor cursor, Entity entity) {
         T obj = (T) entity;
         Field[] fields = obj.getClass().getDeclaredFields();
@@ -300,7 +301,6 @@ public abstract class Wrapper extends SQLiteOpenHelper {
         return (buf[buf.length - 2] + "_" + buf[buf.length - 1]).toLowerCase();
     }
 
-    @SuppressWarnings("unchecked")
     public <T extends Entity> T get(String strQuery, Entity entity) {
         SQLiteDatabase objDb = this.getReadableDatabase();
         Cursor cursor = null;
@@ -327,7 +327,7 @@ public abstract class Wrapper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         try {
-            db.execSQL(getCreate(new Venta()));
+            db.execSQL(getCreate(new Producto()));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package com.villcab.gastos.utils.model;
+package com.villcab.gastos.utils.model.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,6 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Key {
+public @interface Ignore {
 
 }

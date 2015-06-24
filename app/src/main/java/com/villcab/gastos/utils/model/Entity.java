@@ -5,6 +5,8 @@ import java.io.Serializable;
 import android.util.Log;
 
 import com.villcab.gastos.utils.App;
+import com.villcab.gastos.utils.model.annotations.Ignore;
+import com.villcab.gastos.utils.model.annotations.Key;
 
 public class Entity implements Serializable, Cloneable {
 
@@ -44,4 +46,5 @@ public class Entity implements Serializable, Cloneable {
     public <T extends Entity> T getMe() {
         return (T) this;
     }
+
 }
